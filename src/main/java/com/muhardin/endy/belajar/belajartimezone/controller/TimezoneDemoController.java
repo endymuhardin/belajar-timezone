@@ -14,12 +14,16 @@ public class TimezoneDemoController {
     public Map<String, Object> printNow() {
         Map<String, Object> result = new LinkedHashMap<>();
 
-        LocalTime now = LocalTime.now();
-        LocalTime nowJakarta = LocalTime.now(ZoneId.of("Asia/Jakarta"));
+        ZoneId currentTimezone = ZoneId.systemDefault();
+        ZoneId jakartaTimezone = ZoneId.of("Asia/Jakarta");
+
+        LocalTime now = LocalTime.now(currentTimezone);
+        LocalTime nowJakarta = LocalTime.now(jakartaTimezone);
 
         LocalTime openTime = LocalTime.of(9, 30);
         LocalTime closeTime = LocalTime.of(20, 45);
 
+        result.put("Current Timezone", currentTimezone);
         result.put("Server Time", now);
         result.put("Server Time (Asia/Jakarta)", nowJakarta);
         result.put("Open Time", openTime);
