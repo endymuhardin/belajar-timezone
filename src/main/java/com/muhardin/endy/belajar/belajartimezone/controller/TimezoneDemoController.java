@@ -3,6 +3,7 @@ package com.muhardin.endy.belajar.belajartimezone.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.LinkedHashMap;
@@ -26,6 +27,8 @@ public class TimezoneDemoController {
         result.put("Current Timezone", currentTimezone);
         result.put("Server Time", now);
         result.put("Server Time (Asia/Jakarta)", nowJakarta);
+        result.put("Server Time from LocalDateTime (Asia/Jakarta)",
+                LocalDateTime.now(jakartaTimezone).toLocalTime());
         result.put("Open Time", openTime);
         result.put("Close Time", closeTime);
         result.put("Is now open?", (now.isAfter(openTime) && now.isBefore(closeTime)));
