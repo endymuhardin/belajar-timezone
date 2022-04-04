@@ -1,5 +1,8 @@
 package com.muhardin.endy.belajar.belajartimezone.controller;
 
+import com.muhardin.endy.belajar.belajartimezone.dao.JadwalDao;
+import com.muhardin.endy.belajar.belajartimezone.entity.Jadwal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +14,9 @@ import java.util.Map;
 
 @RestController
 public class TimezoneDemoController {
+
+    @Autowired private JadwalDao jadwalDao;
+
     @GetMapping("/")
     public Map<String, Object> printNow() {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -33,6 +39,10 @@ public class TimezoneDemoController {
         result.put("Close Time", closeTime);
         result.put("Is now open?", (now.isAfter(openTime) && now.isBefore(closeTime)));
         result.put("Is now (Asia/Jakarta) open?", (nowJakarta.isAfter(openTime) && nowJakarta.isBefore(closeTime)));
+
+        Jadwal jadwalRamadhan = jadwalDao.findById("j001").get();
+        result.put("Open Time (MySQL)", jadwalRamadhan.getJamMasuk());
+        result.put("Close Time (MySQL)", jadwalRamadhan.getJamKeluar());
 
         return result;
     }
