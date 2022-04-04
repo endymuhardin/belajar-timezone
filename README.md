@@ -23,3 +23,9 @@ Normalnya, timezone diset di sistem operasi. Idealnya timezone di server diset k
     ```
     MAVEN_OPTS="-Duser.timezone=Asia/Jakarta" mvn clean spring-boot:run
     ```
+
+* Simpan data di database dalam format UTC (tampil di JVM dengan local time)
+
+    ```
+    spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+    ```
