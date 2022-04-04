@@ -1,0 +1,13 @@
+services:
+  db-timezone:
+    image: mysql
+    platform: linux/x86_64
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=timezonedb
+      - MYSQL_USER=timezone
+      - MYSQL_PASSWORD=timezone123
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db-timezone:/var/lib/mysql
