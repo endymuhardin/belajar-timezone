@@ -29,3 +29,30 @@ Normalnya, timezone diset di sistem operasi. Idealnya timezone di server diset k
     ```
     spring.jpa.properties.hibernate.jdbc.time_zone=UTC
     ```
+
+* Insert data jadwal baru ke database. `POST` ke `http://localhost:12345/jadwal`
+
+    ```json
+    {
+      "nama" : "Jadwal Normal",
+      "jamMasuk" : "09:00:00",
+      "jamKeluar" : "17:00:00"
+    }
+    ```
+  
+    Hasil _insert_ di database
+
+    ```
+    MySQL [timezonedb]> select * from jadwal \G
+    *************************** 1. row ***************************
+    id: c646bbd6-6266-4b86-8997-e84889160e81
+    nama: Jadwal Normal
+    jam_masuk: 02:00:00
+    jam_keluar: 10:00:00
+    *************************** 2. row ***************************
+    id: j001
+    nama: Jadwal Ramadhan
+    jam_masuk: 01:00:00
+    jam_keluar: 08:00:00
+    2 rows in set (0.025 sec)  
+    ```
